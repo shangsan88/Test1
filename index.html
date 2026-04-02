@@ -4,160 +4,272 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RAW FORM — Design System</title>
-
-  <!-- Fonts: Clash Display + Satoshi via Fontshare -->
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
-
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ─── NAVIGATION ─────────────────────────────────────────────── -->
+  <!-- ─── NAVIGATION ──────────────────────────────────────────────────── -->
   <nav class="nav" id="nav">
     <div class="nav__logo">RAW FORM</div>
     <ul class="nav__links">
-      <li><a href="#">Collection</a></li>
-      <li><a href="#">Archive</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Editorial</a></li>
+      <li><a href="#products">Collection</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#campaign">Editorial</a></li>
+      <li><a href="#newsletter">About</a></li>
     </ul>
-    <div class="nav__icons">
-      <button aria-label="Search"><i data-lucide="search"></i></button>
-      <button aria-label="Bag"><i data-lucide="shopping-bag"></i></button>
+    <div class="nav__right">
+      <div class="nav__icons">
+        <button aria-label="Search"><i data-lucide="search"></i></button>
+        <button aria-label="Bag" class="nav__bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="nav__bag-count">2</span>
+        </button>
+      </div>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Menu">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- ─── HERO ──────────────────────────────────────────────────── -->
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#products" class="mobile-menu__link">Collection</a></li>
+      <li><a href="#archive" class="mobile-menu__link">Archive</a></li>
+      <li><a href="#campaign" class="mobile-menu__link">Editorial</a></li>
+      <li><a href="#newsletter" class="mobile-menu__link">About</a></li>
+    </ul>
+  </div>
+
+  <!-- ─── HERO ────────────────────────────────────────────────────────── -->
   <section class="hero">
-    <!-- Gradient blobs -->
     <div class="blob blob--red"></div>
     <div class="blob blob--orange"></div>
     <div class="blob blob--pink"></div>
+
+    <div class="hero__eyebrow">
+      <span class="hero__tag">SS 2024</span>
+      <span class="hero__tag">New Collection</span>
+    </div>
 
     <div class="hero__content">
       <h1 class="hero__headline">
         <span class="hero__line1">BRUTAL</span>
         <span class="hero__line2">BEAUTY</span>
       </h1>
+    </div>
+
+    <div class="hero__footer">
       <p class="hero__sub">
-        Form stripped to its essence. Type as structure. Contrast as language. Design that refuses to disappear.
+        Form stripped to its essence.<br />Type as structure. Contrast as language.
       </p>
       <div class="hero__cta">
-        <a href="#" class="btn btn--primary">
+        <a href="#products" class="btn btn--primary">
           <span class="btn__fill"></span>
           <span class="btn__label">Explore Collection</span>
         </a>
-        <a href="#" class="hero__link">
-          View Lookbook
-          <i data-lucide="arrow-right"></i>
+        <a href="#campaign" class="hero__link">
+          View Lookbook <i data-lucide="arrow-right"></i>
         </a>
       </div>
     </div>
 
-    <div class="hero__scroll-hint">
-      <span>Scroll</span>
-      <i data-lucide="arrow-down"></i>
+    <div class="hero__meta">
+      <div class="hero__scroll-hint">
+        <i data-lucide="arrow-down"></i>
+        <span>Scroll</span>
+      </div>
+      <div class="hero__count">001 / 024</div>
     </div>
   </section>
 
-  <!-- ─── CATEGORY DIVIDER ─────────────────────────────────────── -->
+  <!-- ─── TICKER ──────────────────────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span>NEW ARRIVALS</span><span class="ticker__dot">✦</span>
+      <span>SS 2024 COLLECTION</span><span class="ticker__dot">✦</span>
+      <span>FORM FOLLOWS FEELING</span><span class="ticker__dot">✦</span>
+      <span>BRUTALIST AESTHETICS</span><span class="ticker__dot">✦</span>
+      <span>FREE SHIPPING OVER $300</span><span class="ticker__dot">✦</span>
+      <span>NEW ARRIVALS</span><span class="ticker__dot">✦</span>
+      <span>SS 2024 COLLECTION</span><span class="ticker__dot">✦</span>
+      <span>FORM FOLLOWS FEELING</span><span class="ticker__dot">✦</span>
+      <span>BRUTALIST AESTHETICS</span><span class="ticker__dot">✦</span>
+      <span>FREE SHIPPING OVER $300</span><span class="ticker__dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ─── CATEGORY DIVIDER ────────────────────────────────────────────── -->
   <section class="divider divider--left">
     <div class="divider__bg"></div>
     <div class="container">
-      <span class="divider__label">SS 2024</span>
-      <h2 class="divider__headline">NEW<br />ARRIVALS</h2>
+      <div class="divider__inner">
+        <div>
+          <span class="divider__label">SS 2024</span>
+          <h2 class="divider__headline">NEW<br />ARRIVALS</h2>
+        </div>
+        <a href="#products" class="divider__cta">
+          View All <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ─── PRODUCT GRID ──────────────────────────────────────────── -->
+  <!-- ─── PRODUCT GRID ─────────────────────────────────────────────────── -->
   <section class="products" id="products">
     <div class="container">
       <div class="product-grid">
 
-        <article class="product-item" style="--delay:0s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #c8c4bc 0%, #a8a49c 100%);">
-              <div class="product-item__placeholder">
-                <i data-lucide="shirt"></i>
-              </div>
+            <div class="product-item__img" style="background:#c4c0b8;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M70 20 L30 60 L50 70 L50 240 L150 240 L150 70 L170 60 L130 20 Q115 10 100 10 Q85 10 70 20Z" fill="#a8a49c" stroke="#8a8680" stroke-width="1.5"/>
+                <path d="M70 20 Q85 35 100 35 Q115 35 130 20" stroke="#8a8680" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
             </div>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">VOID COAT I</p>
+            <div>
+              <p class="product-item__name">VOID COAT I</p>
+              <p class="product-item__subname">Structured wool, natural</p>
+            </div>
             <p class="product-item__price">$680</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.1s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #1E1E1E 0%, #3a3a3a 100%);">
-              <div class="product-item__placeholder light">
-                <i data-lucide="layers"></i>
-              </div>
+            <div class="product-item__img" style="background:#1E1E1E;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M65 15 L20 55 L45 75 L45 245 L155 245 L155 75 L180 55 L135 15 Q118 5 100 5 Q82 5 65 15Z" fill="#2e2e2e" stroke="#444" stroke-width="1.5"/>
+                <path d="M65 15 Q80 32 100 32 Q120 32 135 15" stroke="#444" stroke-width="1" fill="none"/>
+                <line x1="45" y1="120" x2="155" y2="120" stroke="#444" stroke-width="0.75"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
             </div>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">OBSIDIAN JACKET</p>
+            <div>
+              <p class="product-item__name">OBSIDIAN JACKET</p>
+              <p class="product-item__subname">Technical twill, black</p>
+            </div>
             <p class="product-item__price">$520</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.2s">
+        <article class="product-item product-item--featured">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #e8c4a0 0%, #d4a870 100%);">
-              <div class="product-item__placeholder">
-                <i data-lucide="circle"></i>
-              </div>
+            <div class="product-item__img" style="background:#e8c49a;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M80 15 Q100 8 120 15 L140 80 Q120 90 100 90 Q80 90 60 80Z" fill="#d4a870" stroke="#c09060" stroke-width="1.5"/>
+                <path d="M60 80 L55 245 L145 245 L140 80" fill="#e0b080" stroke="#c09060" stroke-width="1.5"/>
+                <path d="M60 80 Q55 160 58 245" stroke="#c09060" stroke-width="0.75" fill="none"/>
+                <path d="M140 80 Q145 160 142 245" stroke="#c09060" stroke-width="0.75" fill="none"/>
+              </svg>
             </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img">New</span>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">TERRA DRESS</p>
+            <div>
+              <p class="product-item__name">TERRA DRESS</p>
+              <p class="product-item__subname">Silk-linen blend, dune</p>
+            </div>
             <p class="product-item__price">$390</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.3s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #DB4A2B 0%, #c03a1e 100%);">
-              <div class="product-item__placeholder light">
-                <i data-lucide="wind"></i>
-              </div>
+            <div class="product-item__img" style="background:#DB4A2B;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M50 20 L150 20 L160 60 L140 65 L140 245 L60 245 L60 65 L40 60 Z" fill="#c43a1e" stroke="#a02e16" stroke-width="1.5"/>
+                <path d="M60 65 Q100 55 140 65" stroke="#a02e16" stroke-width="1" fill="none"/>
+                <path d="M50 20 Q100 30 150 20" stroke="#a02e16" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
             </div>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">SCARLET WRAP</p>
+            <div>
+              <p class="product-item__name">SCARLET WRAP</p>
+              <p class="product-item__subname">Draped jersey, red</p>
+            </div>
             <p class="product-item__price">$310</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.4s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #d0cec8 0%, #b8b4ac 100%);">
-              <div class="product-item__placeholder">
-                <i data-lucide="square"></i>
-              </div>
+            <div class="product-item__img" style="background:#d6d2cc;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M60 25 L30 55 L48 68 L52 180 L148 180 L152 68 L170 55 L140 25 Q120 15 100 15 Q80 15 60 25Z" fill="#bcb8b0" stroke="#a0a09a" stroke-width="1.5"/>
+                <path d="M52 180 Q60 245 100 248 Q140 245 148 180" fill="#bcb8b0" stroke="#a0a09a" stroke-width="1.5"/>
+                <path d="M60 25 Q80 38 100 38 Q120 38 140 25" stroke="#a0a09a" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
             </div>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">STRUCTURE BLOUSE</p>
+            <div>
+              <p class="product-item__name">STRUCTURE BLOUSE</p>
+              <p class="product-item__subname">Cotton poplin, ivory</p>
+            </div>
             <p class="product-item__price">$275</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.5s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);">
-              <div class="product-item__placeholder light">
-                <i data-lucide="minus"></i>
-              </div>
+            <div class="product-item__img" style="background:#1a1a2e;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M65 30 L135 30 L140 60 L138 245 L62 245 L60 60 Z" fill="#252540" stroke="#383858" stroke-width="1.5"/>
+                <line x1="62" y1="100" x2="138" y2="100" stroke="#383858" stroke-width="0.75"/>
+                <path d="M65 30 Q82 22 100 22 Q118 22 135 30" stroke="#383858" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
             </div>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">MIDNIGHT PANT</p>
+            <div>
+              <p class="product-item__name">MIDNIGHT PANT</p>
+              <p class="product-item__subname">Wide leg, navy</p>
+            </div>
             <p class="product-item__price">$420</p>
           </div>
         </article>
@@ -166,16 +278,31 @@
     </div>
   </section>
 
-  <!-- ─── CATEGORY DIVIDER 2 ───────────────────────────────────── -->
-  <section class="divider divider--right">
+  <!-- ─── EDITORIAL STRIP ──────────────────────────────────────────────── -->
+  <div class="editorial-strip">
+    <div class="container">
+      <div class="editorial-strip__inner">
+        <span class="editorial-strip__label">Editorial 2024</span>
+        <p class="editorial-strip__text">The body as canvas. Fabric as manifesto.</p>
+        <a href="#" class="editorial-strip__link">Read <i data-lucide="arrow-up-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── CATEGORY DIVIDER 2 ──────────────────────────────────────────── -->
+  <section class="divider divider--right" id="campaign">
     <div class="divider__bg"></div>
     <div class="container">
-      <span class="divider__label">Editorial</span>
-      <h2 class="divider__headline">THE<br />CAMPAIGN</h2>
+      <div class="divider__inner divider__inner--right">
+        <div>
+          <span class="divider__label">Editorial</span>
+          <h2 class="divider__headline">THE<br />CAMPAIGN</h2>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─── CAMPAIGN BLOCK ───────────────────────────────────────── -->
+  <!-- ─── CAMPAIGN BLOCK ───────────────────────────────────────────────── -->
   <section class="campaign">
     <div class="container">
       <div class="campaign__grid">
@@ -185,7 +312,7 @@
             FOLLOWS<br />
             FEELING
           </h2>
-          <a href="#" class="btn btn--primary campaign__btn">
+          <a href="#" class="btn btn--primary">
             <span class="btn__fill"></span>
             <span class="btn__label">Read Story</span>
           </a>
@@ -230,59 +357,104 @@
     </div>
   </section>
 
-  <!-- ─── CATEGORY DIVIDER 3 ───────────────────────────────────── -->
-  <section class="divider divider--left">
+  <!-- ─── CATEGORY DIVIDER 3 ──────────────────────────────────────────── -->
+  <section class="divider divider--left" id="archive">
     <div class="divider__bg"></div>
     <div class="container">
-      <span class="divider__label">Limited</span>
-      <h2 class="divider__headline">ARCHIVE<br />PIECES</h2>
+      <div class="divider__inner">
+        <div>
+          <span class="divider__label">Limited</span>
+          <h2 class="divider__headline">ARCHIVE<br />PIECES</h2>
+        </div>
+        <a href="#" class="divider__cta">
+          View Archive <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ─── ADDITIONAL PRODUCT ROW ───────────────────────────────── -->
+  <!-- ─── ARCHIVE GRID ─────────────────────────────────────────────────── -->
   <section class="products products--alt">
     <div class="container">
       <div class="product-grid">
 
-        <article class="product-item" style="--delay:0s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #F8A348 0%, #e8903a 100%);">
-              <div class="product-item__placeholder">
-                <i data-lucide="triangle"></i>
-              </div>
+            <div class="product-item__img" style="background:#e89830;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M55 20 L145 20 L155 70 L148 245 L52 245 L45 70 Z" fill="#d48020" stroke="#b86010" stroke-width="1.5"/>
+                <path d="M55 20 Q100 12 145 20" stroke="#b86010" stroke-width="1" fill="none"/>
+                <path d="M48 130 L152 130" stroke="#b86010" stroke-width="0.75"/>
+                <circle cx="100" cy="50" r="8" fill="none" stroke="#b86010" stroke-width="1"/>
+              </svg>
             </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img product-item__badge-img--archive">Archive</span>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">AMBER ARCHIVE I</p>
-            <p class="product-item__price">$890 <span class="product-item__badge">Archive</span></p>
+            <div>
+              <p class="product-item__name">AMBER ARCHIVE I</p>
+              <p class="product-item__subname">SS 2022, limited run</p>
+            </div>
+            <p class="product-item__price">$890</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.15s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #FF89A9 0%, #e0607a 100%);">
-              <div class="product-item__placeholder">
-                <i data-lucide="hexagon"></i>
-              </div>
+            <div class="product-item__img" style="background:#e8709a;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M60 15 L30 50 L48 65 L52 245 L148 245 L152 65 L170 50 L140 15 Q120 6 100 6 Q80 6 60 15Z" fill="#d06080" stroke="#b04060" stroke-width="1.5"/>
+                <path d="M60 15 Q80 30 100 30 Q120 30 140 15" stroke="#b04060" stroke-width="1" fill="none"/>
+                <path d="M52 150 Q100 162 148 150" stroke="#b04060" stroke-width="0.75" fill="none"/>
+              </svg>
             </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img product-item__badge-img--archive">Archive</span>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">PETAL SUIT</p>
-            <p class="product-item__price">$1,200 <span class="product-item__badge">Archive</span></p>
+            <div>
+              <p class="product-item__name">PETAL SUIT</p>
+              <p class="product-item__subname">AW 2021, one of 30</p>
+            </div>
+            <p class="product-item__price">$1,200</p>
           </div>
         </article>
 
-        <article class="product-item" style="--delay:0.3s">
+        <article class="product-item">
           <div class="product-item__img-wrap">
-            <div class="product-item__img" style="background: linear-gradient(135deg, #8a8680 0%, #5a5652 100%);">
-              <div class="product-item__placeholder light">
-                <i data-lucide="pentagon"></i>
-              </div>
+            <div class="product-item__img" style="background:#686460;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M50 18 L150 18 L165 65 L155 245 L45 245 L35 65 Z" fill="#585450" stroke="#484440" stroke-width="1.5"/>
+                <path d="M50 18 Q100 8 150 18" stroke="#484440" stroke-width="1" fill="none"/>
+                <path d="M38 110 L162 110" stroke="#484440" stroke-width="0.75"/>
+                <path d="M40 160 L160 160" stroke="#484440" stroke-width="0.5"/>
+              </svg>
             </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img product-item__badge-img--archive">Archive</span>
           </div>
           <div class="product-item__meta">
-            <p class="product-item__name">ASH OVERCOAT</p>
-            <p class="product-item__price">$1,450 <span class="product-item__badge">Archive</span></p>
+            <div>
+              <p class="product-item__name">ASH OVERCOAT</p>
+              <p class="product-item__subname">SS 2020, final pieces</p>
+            </div>
+            <p class="product-item__price">$1,450</p>
           </div>
         </article>
 
@@ -290,8 +462,8 @@
     </div>
   </section>
 
-  <!-- ─── NEWSLETTER ────────────────────────────────────────────── -->
-  <section class="newsletter">
+  <!-- ─── NEWSLETTER ───────────────────────────────────────────────────── -->
+  <section class="newsletter" id="newsletter">
     <div class="blob blob--nl-red"></div>
     <div class="blob blob--nl-orange"></div>
     <div class="container">
@@ -301,19 +473,20 @@
           <p class="newsletter__desc">
             Dispatches from the edge of design. Seasonal drops, editorials, and things that don't fit anywhere else.
           </p>
-          <form class="newsletter__form" onsubmit="return false;">
-            <input type="email" placeholder="YOUR EMAIL" class="newsletter__input" />
+          <form class="newsletter__form" onsubmit="handleSubscribe(event)">
+            <input type="email" placeholder="YOUR EMAIL" class="newsletter__input" required />
             <button type="submit" class="btn btn--primary">
               <span class="btn__fill"></span>
               <span class="btn__label">Subscribe</span>
             </button>
           </form>
+          <p class="newsletter__fine">No spam. Unsubscribe at any time.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── FOOTER ────────────────────────────────────────────────── -->
+  <!-- ─── FOOTER ──────────────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="footer__year">2024</div>
     <div class="container">
@@ -321,6 +494,7 @@
 
         <div class="footer__col footer__col--brand">
           <p class="footer__logo">RAW<br />FORM</p>
+          <p class="footer__tagline-brand">Form Follows Feeling.</p>
           <div class="footer__social">
             <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
             <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
@@ -365,13 +539,16 @@
 
       <div class="footer__bottom">
         <p class="footer__copy">© 2024 Raw Form. All rights reserved.</p>
-        <p class="footer__tagline">Form Follows Feeling</p>
+        <div class="footer__bottom-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">Cookies</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Init Lucide icons
     lucide.createIcons();
 
     // ── Intersection Observer: slide-up entrance ──────────────────
@@ -382,38 +559,67 @@
           observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
 
-    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+    const animTargets = [
+      '.hero__eyebrow',
+      '.hero__content',
+      '.hero__footer',
+      '.divider__label',
+      '.divider__headline',
+      '.divider__cta',
+      '.product-item',
+      '.campaign__left',
+      '.campaign__item',
+      '.editorial-strip__inner',
+      '.newsletter__headline',
+      '.newsletter__form-wrap',
+    ];
+
+    animTargets.forEach(sel => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        el.classList.add('animate-in');
+        if (sel === '.product-item') {
+          el.style.transitionDelay = `${i % 3 * 0.1}s`;
+        }
+        if (sel === '.campaign__item') {
+          el.style.transitionDelay = `${i * 0.12}s`;
+        }
+        observer.observe(el);
+      });
+    });
 
     // ── Nav scroll state ──────────────────────────────────────────
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('nav--scrolled', window.scrollY > 40);
-    });
+    }, { passive: true });
 
-    // ── Mark animatable elements ──────────────────────────────────
-    const animTargets = [
-      '.hero__content',
-      '.divider__headline',
-      '.divider__label',
-      '.product-item',
-      '.campaign__left',
-      '.campaign__item',
-      '.newsletter__headline',
-      '.newsletter__form-wrap',
-    ];
-    animTargets.forEach(sel => {
-      document.querySelectorAll(sel).forEach((el, i) => {
-        el.classList.add('animate-in');
-        if (sel === '.product-item') {
-          el.style.transitionDelay = el.style.getPropertyValue('--delay') || `${i * 0.1}s`;
-        }
+    // ── Mobile menu ───────────────────────────────────────────────
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-menu__link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        document.body.style.overflow = '';
       });
     });
 
-    // Re-run observer after marking (elements may already be in view)
-    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+    // ── Newsletter ────────────────────────────────────────────────
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('.newsletter__input');
+      const btn = e.target.querySelector('.btn__label');
+      btn.textContent = 'Subscribed ✓';
+      input.value = '';
+      setTimeout(() => { btn.textContent = 'Subscribe'; }, 3000);
+    }
   </script>
 </body>
 </html>
