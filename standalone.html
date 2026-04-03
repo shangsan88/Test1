@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAW FORM — Design System</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+/* ================================================================
+   RAW FORM — Design System  |  Brutalist Poster Aesthetic
+   ================================================================ */
+
+/* ── Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Tokens ────────────────────────────────────────────────────── */
+:root {
+  --base:         #E4E2DD;
+  --primary:      #1E1E1E;
+  --red:          #DB4A2B;
+  --orange:       #F8A348;
+  --pink:         #FF89A9;
+  --muted:        #444444;
+  --campaign-bg:  #D9D6D0;
+  --font-display: 'Clash Display', 'Arial Black', sans-serif;
+  --font-body:    'Satoshi', 'Arial', sans-serif;
+  --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--base);
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--red); color: #fff; }
+
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: var(--base); }
+::-webkit-scrollbar-thumb  { background: var(--red); border-radius: 0; }
+
+/* ── Layout ────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Entrance animation ────────────────────────────────────────── */
+.animate-in {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.animate-in.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ── Blobs ─────────────────────────────────────────────────────── */
+.blob {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(140px);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob--red {
+  background: var(--red);
+  top: -20vw; left: -15vw;
+  opacity: 0.55;
+  animation: blobPulse 13s ease-in-out infinite alternate,
+             blobDrift  17s ease-in-out infinite alternate;
+}
+.blob--orange {
+  background: var(--orange);
+  top: 5vw; right: -15vw;
+  opacity: 0.5;
+  animation: blobPulse  15s ease-in-out infinite alternate,
+             blobDrift2 20s ease-in-out infinite alternate;
+}
+.blob--pink {
+  background: var(--pink);
+  bottom: -5vw; left: 35vw;
+  opacity: 0.38;
+  animation: blobPulse 10s ease-in-out infinite alternate;
+}
+.blob--nl-red {
+  background: var(--red);
+  top: -10vw; right: -10vw;
+  opacity: 0.4;
+  animation: blobPulse 14s ease-in-out infinite alternate;
+}
+.blob--nl-orange {
+  background: var(--orange);
+  bottom: -10vw; left: -10vw;
+  opacity: 0.35;
+  animation: blobPulse 11s ease-in-out infinite alternate;
+}
+
+@keyframes blobPulse {
+  from { opacity: 0.45; transform: scale(1); }
+  to   { opacity: 0.85; transform: scale(1.1); }
+}
+@keyframes blobDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(4vw, 3vw) scale(1.05); }
+}
+@keyframes blobDrift2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-3vw, 4vw) scale(1.05); }
+}
+
+/* ── Button ────────────────────────────────────────────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 36px;
+  background: var(--primary);
+  color: var(--base);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease-out;
+  white-space: nowrap;
+}
+.btn__fill {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: translateX(-101%);
+  transition: transform 0.3s ease-out;
+  z-index: 0;
+}
+.btn__label { position: relative; z-index: 1; }
+.btn:hover .btn__fill { transform: translateX(0); }
+.btn:hover { color: var(--red); }
+
+/* ── Navigation ────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 48px;
+  transition: background 0.35s ease, padding 0.35s ease, border-color 0.35s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav--scrolled {
+  background: rgba(228, 226, 221, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 18px 48px;
+  border-bottom-color: rgba(30, 30, 30, 0.08);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--primary);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  list-style: none;
+}
+.nav__links a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary);
+  position: relative;
+}
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--red);
+  transition: width 0.3s ease;
+}
+.nav__links a:hover::after { width: 100%; }
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav__icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav__icons button {
+  background: none; border: none; cursor: pointer;
+  color: var(--primary);
+  display: flex; align-items: center;
+  padding: 8px;
+  border-radius: 0;
+  transition: color 0.2s ease;
+  position: relative;
+}
+.nav__icons button:hover { color: var(--red); }
+.nav__icons svg { width: 20px; height: 20px; }
+
+.nav__bag-count {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 16px; height: 16px;
+  background: var(--red);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: none; border: none; cursor: pointer;
+  padding: 6px;
+}
+.nav__hamburger span {
+  display: block;
+  width: 100%; height: 1.5px;
+  background: var(--primary);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+.nav__hamburger.is-open span:first-child { transform: translateY(3.25px) rotate(45deg); }
+.nav__hamburger.is-open span:last-child  { transform: translateY(-3.25px) rotate(-45deg); }
+
+/* ── Mobile menu ───────────────────────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: var(--base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-100%);
+  transition: transform 0.5s var(--ease);
+}
+.mobile-menu.is-open { transform: translateY(0); }
+.mobile-menu ul { list-style: none; text-align: center; }
+.mobile-menu__link {
+  display: block;
+  padding: 16px 0;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary);
+  transition: color 0.2s ease;
+}
+.mobile-menu__link:hover { color: var(--red); }
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  padding-top: 100px;
+  overflow: hidden;
+  background: var(--base);
+}
+
+.hero__eyebrow {
+  position: relative;
+  z-index: 1;
+  padding: 0 48px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.hero__tag {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.5;
+  border: 1px solid rgba(30,30,30,0.2);
+  padding: 5px 12px;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  padding: 0 48px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero__headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18vw;
+  line-height: 0.75;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  display: flex;
+  flex-direction: column;
+}
+.hero__line1 { margin-left: 0; }
+.hero__line2 { margin-left: 15vw; }
+
+.hero__footer {
+  position: relative;
+  z-index: 1;
+  padding: 48px 48px 60px;
+  display: flex;
+  align-items: flex-end;
+  gap: 80px;
+}
+
+.hero__sub {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  max-width: 320px;
+  line-height: 1.65;
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.hero__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--red);
+  text-decoration: none;
+  transition: gap 0.25s ease;
+}
+.hero__link:hover { gap: 14px; }
+.hero__link svg { width: 16px; height: 16px; }
+
+.hero__meta {
+  position: absolute;
+  bottom: 28px; right: 48px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.hero__scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.4;
+}
+.hero__scroll-hint svg { width: 14px; height: 14px; animation: bounceY 2s ease infinite; }
+@keyframes bounceY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+.hero__count {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  opacity: 0.3;
+}
+
+/* ── Ticker ────────────────────────────────────────────────────── */
+.ticker {
+  background: var(--primary);
+  color: var(--base);
+  overflow: hidden;
+  padding: 14px 0;
+  border-top: 1px solid rgba(228,226,221,0.08);
+}
+.ticker__track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: tickerScroll 28s linear infinite;
+}
+.ticker__track span {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+.ticker__dot {
+  color: var(--red) !important;
+  padding: 0 !important;
+  opacity: 0.8;
+}
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Category Divider ──────────────────────────────────────────── */
+.divider {
+  position: relative;
+  padding: 128px 0;
+  overflow: hidden;
+}
+.divider__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.divider--left  .divider__bg { background: radial-gradient(ellipse at 15% 50%, rgba(248,163,72,0.18) 0%, transparent 55%); }
+.divider--right .divider__bg { background: radial-gradient(ellipse at 85% 50%, rgba(248,163,72,0.18) 0%, transparent 55%); }
+.divider .container { position: relative; z-index: 1; }
+
+.divider__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.divider__inner--right {
+  justify-content: flex-end;
+  text-align: right;
+}
+.divider__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: 16px;
+}
+.divider__headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12vw;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.9;
+}
+.divider__cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary);
+  opacity: 0.6;
+  transition: opacity 0.2s ease, gap 0.2s ease;
+  align-self: flex-end;
+  padding-bottom: 8px;
+}
+.divider__cta:hover { opacity: 1; gap: 14px; }
+.divider__cta svg { width: 16px; height: 16px; }
+
+/* ── Product Grid ──────────────────────────────────────────────── */
+.products { padding: 0 0 80px; }
+.products--alt { padding-bottom: 120px; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
+  row-gap: 64px;
+}
+
+.product-item { cursor: pointer; }
+
+.product-item__img-wrap {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.product-item__img {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s var(--ease);
+}
+.product-item:hover .product-item__img { transform: scale(1.05); }
+
+.product-svg {
+  width: 55%;
+  height: 55%;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+.product-item:hover .product-svg { opacity: 0.6; }
+
+/* Quick add overlay */
+.product-item__overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(30,30,30,0.5) 0%, transparent 100%);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.product-item:hover .product-item__overlay { opacity: 1; transform: translateY(0); }
+
+.product-item__quick-add {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: var(--base);
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease-out;
+}
+.product-item__quick-add .btn__fill { background: var(--red); }
+.product-item__quick-add:hover .btn__fill { transform: translateX(0); }
+.product-item__quick-add:hover { color: #fff; }
+.product-item__quick-add .btn__label { position: relative; z-index: 1; }
+
+/* Badge on image */
+.product-item__badge-img {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--primary);
+  color: var(--base);
+  padding: 4px 10px;
+}
+.product-item__badge-img--archive {
+  background: var(--red);
+}
+
+.product-item__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.product-item__name {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  transition: color 0.2s ease;
+  line-height: 1.2;
+}
+.product-item:hover .product-item__name { color: var(--pink); }
+
+.product-item__subname {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+.product-item__price {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* ── Editorial strip ───────────────────────────────────────────── */
+.editorial-strip {
+  border-top: 1px solid rgba(30,30,30,0.1);
+  border-bottom: 1px solid rgba(30,30,30,0.1);
+  padding: 24px 0;
+  margin-bottom: 0;
+}
+.editorial-strip__inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.editorial-strip__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.editorial-strip__text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--primary);
+  flex: 1;
+  opacity: 0.7;
+  font-style: italic;
+}
+.editorial-strip__link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary);
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+.editorial-strip__link:hover { color: var(--red); }
+.editorial-strip__link svg { width: 14px; height: 14px; }
+
+/* ── Campaign Block ────────────────────────────────────────────── */
+.campaign {
+  background: var(--campaign-bg);
+  padding: 120px 0;
+}
+.campaign__grid {
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+  gap: 80px;
+  align-items: start;
+}
+.campaign__headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 6vw;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 48px;
+}
+.campaign__right { padding-top: 8px; }
+
+.divider-thin {
+  width: 100%;
+  height: 1px;
+  background: rgba(30, 30, 30, 0.15);
+}
+
+.campaign__item-content { padding: 24px 0; }
+.campaign__item-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: 10px;
+}
+.campaign__item-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--primary);
+  margin-bottom: 16px;
+  opacity: 0.75;
+}
+.campaign__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary);
+  transition: color 0.2s ease;
+}
+.campaign__read-more:hover { color: var(--red); }
+.campaign__read-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+.campaign__read-more:hover .campaign__read-icon {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.campaign__read-icon svg { width: 12px; height: 12px; }
+
+/* ── Newsletter ────────────────────────────────────────────────── */
+.newsletter {
+  position: relative;
+  padding: 140px 0;
+  overflow: hidden;
+}
+.newsletter__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.newsletter__headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(60px, 8vw, 110px);
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.newsletter__desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--primary);
+  opacity: 0.7;
+  margin-bottom: 32px;
+  max-width: 440px;
+}
+.newsletter__form {
+  display: flex;
+}
+.newsletter__input {
+  flex: 1;
+  padding: 16px 20px;
+  background: transparent;
+  border: 1px solid rgba(30,30,30,0.25);
+  border-right: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+.newsletter__input::placeholder { color: rgba(30,30,30,0.35); }
+.newsletter__input:focus { border-color: var(--primary); }
+
+.newsletter__fine {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--primary);
+  opacity: 0.35;
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Footer ────────────────────────────────────────────────────── */
+.footer {
+  background: var(--primary);
+  color: var(--base);
+  padding: 80px 0 40px;
+  position: relative;
+  overflow: hidden;
+}
+.footer__year {
+  position: absolute;
+  bottom: -2vw; right: -1vw;
+  font-family: var(--font-display);
+  font-size: 10vw;
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: rgba(255,255,255,0.05);
+  pointer-events: none;
+  user-select: none;
+}
+.footer .container { position: relative; z-index: 1; }
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(228,226,221,0.08);
+  margin-bottom: 0;
+}
+.footer__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--base);
+  margin-bottom: 16px;
+}
+.footer__tagline-brand {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--base);
+  opacity: 0.35;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.footer__social { display: flex; gap: 16px; }
+.footer__social a {
+  color: var(--base);
+  opacity: 0.5;
+  display: flex;
+  transition: opacity 0.2s ease;
+}
+.footer__social a:hover { opacity: 1; }
+.footer__social svg { width: 18px; height: 18px; }
+
+.footer__col-title {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--base);
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+.footer__col ul { list-style: none; }
+.footer__col ul li { margin-bottom: 10px; }
+.footer__col ul li a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--base);
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+}
+.footer__col ul li a:hover { opacity: 1; }
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+}
+.footer__copy {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--base);
+  opacity: 0.3;
+}
+.footer__bottom-links {
+  display: flex;
+  gap: 24px;
+}
+.footer__bottom-links a {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--base);
+  text-decoration: none;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+.footer__bottom-links a:hover { opacity: 0.8; }
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1100px) {
+  .campaign__grid    { grid-template-columns: 1fr; }
+  .campaign__headline { font-size: 10vw; }
+  .newsletter__inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer__grid      { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+
+  .nav { padding: 20px 24px; }
+  .nav--scrolled { padding: 14px 24px; }
+  .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+
+  .hero { padding-top: 80px; }
+  .hero__eyebrow { padding: 0 24px; }
+  .hero__content { padding: 0 24px; }
+  .hero__headline { font-size: 22vw; }
+  .hero__line2 { margin-left: 8vw; }
+  .hero__footer { padding: 32px 24px 48px; flex-direction: column; gap: 28px; }
+  .hero__meta { right: 24px; }
+
+  .divider { padding: 80px 0; }
+  .divider__headline { font-size: 16vw; }
+  .divider__inner { flex-direction: column; gap: 24px; align-items: flex-start; }
+
+  .product-grid { grid-template-columns: 1fr 1fr; }
+
+  .editorial-strip__text { display: none; }
+
+  .campaign__headline { font-size: 14vw; }
+
+  .footer__grid   { grid-template-columns: 1fr; gap: 36px; }
+  .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+  .newsletter__form { flex-direction: column; }
+  .newsletter__input { border-right: 1px solid rgba(30,30,30,0.25); border-bottom: none; }
+}
+
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .hero__headline { font-size: 27vw; }
+  .hero__footer { gap: 20px; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- ─── NAVIGATION ──────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">RAW FORM</div>
+    <ul class="nav__links">
+      <li><a href="#products">Collection</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#campaign">Editorial</a></li>
+      <li><a href="#newsletter">About</a></li>
+    </ul>
+    <div class="nav__right">
+      <div class="nav__icons">
+        <button aria-label="Search"><i data-lucide="search"></i></button>
+        <button aria-label="Bag" class="nav__bag">
+          <i data-lucide="shopping-bag"></i>
+          <span class="nav__bag-count">2</span>
+        </button>
+      </div>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#products" class="mobile-menu__link">Collection</a></li>
+      <li><a href="#archive" class="mobile-menu__link">Archive</a></li>
+      <li><a href="#campaign" class="mobile-menu__link">Editorial</a></li>
+      <li><a href="#newsletter" class="mobile-menu__link">About</a></li>
+    </ul>
+  </div>
+
+  <!-- ─── HERO ────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="blob blob--red"></div>
+    <div class="blob blob--orange"></div>
+    <div class="blob blob--pink"></div>
+
+    <div class="hero__eyebrow">
+      <span class="hero__tag">SS 2024</span>
+      <span class="hero__tag">New Collection</span>
+    </div>
+
+    <div class="hero__content">
+      <h1 class="hero__headline">
+        <span class="hero__line1">BRUTAL</span>
+        <span class="hero__line2">BEAUTY</span>
+      </h1>
+    </div>
+
+    <div class="hero__footer">
+      <p class="hero__sub">
+        Form stripped to its essence.<br />Type as structure. Contrast as language.
+      </p>
+      <div class="hero__cta">
+        <a href="#products" class="btn btn--primary">
+          <span class="btn__fill"></span>
+          <span class="btn__label">Explore Collection</span>
+        </a>
+        <a href="#campaign" class="hero__link">
+          View Lookbook <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__meta">
+      <div class="hero__scroll-hint">
+        <i data-lucide="arrow-down"></i>
+        <span>Scroll</span>
+      </div>
+      <div class="hero__count">001 / 024</div>
+    </div>
+  </section>
+
+  <!-- ─── TICKER ──────────────────────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span>NEW ARRIVALS</span><span class="ticker__dot">✦</span>
+      <span>SS 2024 COLLECTION</span><span class="ticker__dot">✦</span>
+      <span>FORM FOLLOWS FEELING</span><span class="ticker__dot">✦</span>
+      <span>BRUTALIST AESTHETICS</span><span class="ticker__dot">✦</span>
+      <span>FREE SHIPPING OVER $300</span><span class="ticker__dot">✦</span>
+      <span>NEW ARRIVALS</span><span class="ticker__dot">✦</span>
+      <span>SS 2024 COLLECTION</span><span class="ticker__dot">✦</span>
+      <span>FORM FOLLOWS FEELING</span><span class="ticker__dot">✦</span>
+      <span>BRUTALIST AESTHETICS</span><span class="ticker__dot">✦</span>
+      <span>FREE SHIPPING OVER $300</span><span class="ticker__dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ─── CATEGORY DIVIDER ────────────────────────────────────────────── -->
+  <section class="divider divider--left">
+    <div class="divider__bg"></div>
+    <div class="container">
+      <div class="divider__inner">
+        <div>
+          <span class="divider__label">SS 2024</span>
+          <h2 class="divider__headline">NEW<br />ARRIVALS</h2>
+        </div>
+        <a href="#products" class="divider__cta">
+          View All <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRODUCT GRID ─────────────────────────────────────────────────── -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="product-grid">
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#c4c0b8;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M70 20 L30 60 L50 70 L50 240 L150 240 L150 70 L170 60 L130 20 Q115 10 100 10 Q85 10 70 20Z" fill="#a8a49c" stroke="#8a8680" stroke-width="1.5"/>
+                <path d="M70 20 Q85 35 100 35 Q115 35 130 20" stroke="#8a8680" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">VOID COAT I</p>
+              <p class="product-item__subname">Structured wool, natural</p>
+            </div>
+            <p class="product-item__price">$680</p>
+          </div>
+        </article>
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#1E1E1E;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M65 15 L20 55 L45 75 L45 245 L155 245 L155 75 L180 55 L135 15 Q118 5 100 5 Q82 5 65 15Z" fill="#2e2e2e" stroke="#444" stroke-width="1.5"/>
+                <path d="M65 15 Q80 32 100 32 Q120 32 135 15" stroke="#444" stroke-width="1" fill="none"/>
+                <line x1="45" y1="120" x2="155" y2="120" stroke="#444" stroke-width="0.75"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">OBSIDIAN JACKET</p>
+              <p class="product-item__subname">Technical twill, black</p>
+            </div>
+            <p class="product-item__price">$520</p>
+          </div>
+        </article>
+
+        <article class="product-item product-item--featured">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#e8c49a;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M80 15 Q100 8 120 15 L140 80 Q120 90 100 90 Q80 90 60 80Z" fill="#d4a870" stroke="#c09060" stroke-width="1.5"/>
+                <path d="M60 80 L55 245 L145 245 L140 80" fill="#e0b080" stroke="#c09060" stroke-width="1.5"/>
+                <path d="M60 80 Q55 160 58 245" stroke="#c09060" stroke-width="0.75" fill="none"/>
+                <path d="M140 80 Q145 160 142 245" stroke="#c09060" stroke-width="0.75" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img">New</span>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">TERRA DRESS</p>
+              <p class="product-item__subname">Silk-linen blend, dune</p>
+            </div>
+            <p class="product-item__price">$390</p>
+          </div>
+        </article>
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#DB4A2B;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M50 20 L150 20 L160 60 L140 65 L140 245 L60 245 L60 65 L40 60 Z" fill="#c43a1e" stroke="#a02e16" stroke-width="1.5"/>
+                <path d="M60 65 Q100 55 140 65" stroke="#a02e16" stroke-width="1" fill="none"/>
+                <path d="M50 20 Q100 30 150 20" stroke="#a02e16" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">SCARLET WRAP</p>
+              <p class="product-item__subname">Draped jersey, red</p>
+            </div>
+            <p class="product-item__price">$310</p>
+          </div>
+        </article>
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#d6d2cc;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M60 25 L30 55 L48 68 L52 180 L148 180 L152 68 L170 55 L140 25 Q120 15 100 15 Q80 15 60 25Z" fill="#bcb8b0" stroke="#a0a09a" stroke-width="1.5"/>
+                <path d="M52 180 Q60 245 100 248 Q140 245 148 180" fill="#bcb8b0" stroke="#a0a09a" stroke-width="1.5"/>
+                <path d="M60 25 Q80 38 100 38 Q120 38 140 25" stroke="#a0a09a" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">STRUCTURE BLOUSE</p>
+              <p class="product-item__subname">Cotton poplin, ivory</p>
+            </div>
+            <p class="product-item__price">$275</p>
+          </div>
+        </article>
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#1a1a2e;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M65 30 L135 30 L140 60 L138 245 L62 245 L60 60 Z" fill="#252540" stroke="#383858" stroke-width="1.5"/>
+                <line x1="62" y1="100" x2="138" y2="100" stroke="#383858" stroke-width="0.75"/>
+                <path d="M65 30 Q82 22 100 22 Q118 22 135 30" stroke="#383858" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">MIDNIGHT PANT</p>
+              <p class="product-item__subname">Wide leg, navy</p>
+            </div>
+            <p class="product-item__price">$420</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EDITORIAL STRIP ──────────────────────────────────────────────── -->
+  <div class="editorial-strip">
+    <div class="container">
+      <div class="editorial-strip__inner">
+        <span class="editorial-strip__label">Editorial 2024</span>
+        <p class="editorial-strip__text">The body as canvas. Fabric as manifesto.</p>
+        <a href="#" class="editorial-strip__link">Read <i data-lucide="arrow-up-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── CATEGORY DIVIDER 2 ──────────────────────────────────────────── -->
+  <section class="divider divider--right" id="campaign">
+    <div class="divider__bg"></div>
+    <div class="container">
+      <div class="divider__inner divider__inner--right">
+        <div>
+          <span class="divider__label">Editorial</span>
+          <h2 class="divider__headline">THE<br />CAMPAIGN</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CAMPAIGN BLOCK ───────────────────────────────────────────────── -->
+  <section class="campaign">
+    <div class="container">
+      <div class="campaign__grid">
+        <div class="campaign__left">
+          <h2 class="campaign__headline">
+            FORM<br />
+            FOLLOWS<br />
+            FEELING
+          </h2>
+          <a href="#" class="btn btn--primary">
+            <span class="btn__fill"></span>
+            <span class="btn__label">Read Story</span>
+          </a>
+        </div>
+        <div class="campaign__right">
+          <div class="campaign__item">
+            <div class="divider-thin"></div>
+            <div class="campaign__item-content">
+              <span class="campaign__item-label">Volume 01</span>
+              <p class="campaign__item-text">The architecture of absence — why restraint is the loudest statement a designer can make.</p>
+              <a href="#" class="campaign__read-more">
+                Read More
+                <span class="campaign__read-icon"><i data-lucide="arrow-up-right"></i></span>
+              </a>
+            </div>
+          </div>
+          <div class="campaign__item">
+            <div class="divider-thin"></div>
+            <div class="campaign__item-content">
+              <span class="campaign__item-label">Volume 02</span>
+              <p class="campaign__item-text">Brutalism reclaimed — from concrete towers to couture. The movement that never left.</p>
+              <a href="#" class="campaign__read-more">
+                Read More
+                <span class="campaign__read-icon"><i data-lucide="arrow-up-right"></i></span>
+              </a>
+            </div>
+          </div>
+          <div class="campaign__item">
+            <div class="divider-thin"></div>
+            <div class="campaign__item-content">
+              <span class="campaign__item-label">Volume 03</span>
+              <p class="campaign__item-text">Grid as gospel — the invisible lines that give chaos a skeleton to dance on.</p>
+              <a href="#" class="campaign__read-more">
+                Read More
+                <span class="campaign__read-icon"><i data-lucide="arrow-up-right"></i></span>
+              </a>
+            </div>
+          </div>
+          <div class="divider-thin"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CATEGORY DIVIDER 3 ──────────────────────────────────────────── -->
+  <section class="divider divider--left" id="archive">
+    <div class="divider__bg"></div>
+    <div class="container">
+      <div class="divider__inner">
+        <div>
+          <span class="divider__label">Limited</span>
+          <h2 class="divider__headline">ARCHIVE<br />PIECES</h2>
+        </div>
+        <a href="#" class="divider__cta">
+          View Archive <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ARCHIVE GRID ─────────────────────────────────────────────────── -->
+  <section class="products products--alt">
+    <div class="container">
+      <div class="product-grid">
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#e89830;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M55 20 L145 20 L155 70 L148 245 L52 245 L45 70 Z" fill="#d48020" stroke="#b86010" stroke-width="1.5"/>
+                <path d="M55 20 Q100 12 145 20" stroke="#b86010" stroke-width="1" fill="none"/>
+                <path d="M48 130 L152 130" stroke="#b86010" stroke-width="0.75"/>
+                <circle cx="100" cy="50" r="8" fill="none" stroke="#b86010" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img product-item__badge-img--archive">Archive</span>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">AMBER ARCHIVE I</p>
+              <p class="product-item__subname">SS 2022, limited run</p>
+            </div>
+            <p class="product-item__price">$890</p>
+          </div>
+        </article>
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#e8709a;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M60 15 L30 50 L48 65 L52 245 L148 245 L152 65 L170 50 L140 15 Q120 6 100 6 Q80 6 60 15Z" fill="#d06080" stroke="#b04060" stroke-width="1.5"/>
+                <path d="M60 15 Q80 30 100 30 Q120 30 140 15" stroke="#b04060" stroke-width="1" fill="none"/>
+                <path d="M52 150 Q100 162 148 150" stroke="#b04060" stroke-width="0.75" fill="none"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img product-item__badge-img--archive">Archive</span>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">PETAL SUIT</p>
+              <p class="product-item__subname">AW 2021, one of 30</p>
+            </div>
+            <p class="product-item__price">$1,200</p>
+          </div>
+        </article>
+
+        <article class="product-item">
+          <div class="product-item__img-wrap">
+            <div class="product-item__img" style="background:#686460;">
+              <svg viewBox="0 0 200 267" fill="none" xmlns="http://www.w3.org/2000/svg" class="product-svg">
+                <path d="M50 18 L150 18 L165 65 L155 245 L45 245 L35 65 Z" fill="#585450" stroke="#484440" stroke-width="1.5"/>
+                <path d="M50 18 Q100 8 150 18" stroke="#484440" stroke-width="1" fill="none"/>
+                <path d="M38 110 L162 110" stroke="#484440" stroke-width="0.75"/>
+                <path d="M40 160 L160 160" stroke="#484440" stroke-width="0.5"/>
+              </svg>
+            </div>
+            <div class="product-item__overlay">
+              <button class="product-item__quick-add">
+                <span class="btn__fill"></span>
+                <span class="btn__label">Quick Add</span>
+              </button>
+            </div>
+            <span class="product-item__badge-img product-item__badge-img--archive">Archive</span>
+          </div>
+          <div class="product-item__meta">
+            <div>
+              <p class="product-item__name">ASH OVERCOAT</p>
+              <p class="product-item__subname">SS 2020, final pieces</p>
+            </div>
+            <p class="product-item__price">$1,450</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── NEWSLETTER ───────────────────────────────────────────────────── -->
+  <section class="newsletter" id="newsletter">
+    <div class="blob blob--nl-red"></div>
+    <div class="blob blob--nl-orange"></div>
+    <div class="container">
+      <div class="newsletter__inner">
+        <h2 class="newsletter__headline">JOIN<br />THE FORM</h2>
+        <div class="newsletter__form-wrap">
+          <p class="newsletter__desc">
+            Dispatches from the edge of design. Seasonal drops, editorials, and things that don't fit anywhere else.
+          </p>
+          <form class="newsletter__form" onsubmit="handleSubscribe(event)">
+            <input type="email" placeholder="YOUR EMAIL" class="newsletter__input" required />
+            <button type="submit" class="btn btn--primary">
+              <span class="btn__fill"></span>
+              <span class="btn__label">Subscribe</span>
+            </button>
+          </form>
+          <p class="newsletter__fine">No spam. Unsubscribe at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ──────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer__year">2024</div>
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__col footer__col--brand">
+          <p class="footer__logo">RAW<br />FORM</p>
+          <p class="footer__tagline-brand">Form Follows Feeling.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" aria-label="Pinterest"><i data-lucide="pinterest"></i></a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <p class="footer__col-title">Collections</p>
+          <ul>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Archive</a></li>
+            <li><a href="#">Sale</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <p class="footer__col-title">Studio</p>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Editorial</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <p class="footer__col-title">Support</p>
+          <ul>
+            <li><a href="#">Sizing Guide</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 Raw Form. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // ── Intersection Observer: slide-up entrance ──────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const animTargets = [
+      '.hero__eyebrow',
+      '.hero__content',
+      '.hero__footer',
+      '.divider__label',
+      '.divider__headline',
+      '.divider__cta',
+      '.product-item',
+      '.campaign__left',
+      '.campaign__item',
+      '.editorial-strip__inner',
+      '.newsletter__headline',
+      '.newsletter__form-wrap',
+    ];
+
+    animTargets.forEach(sel => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        el.classList.add('animate-in');
+        if (sel === '.product-item') {
+          el.style.transitionDelay = `${i % 3 * 0.1}s`;
+        }
+        if (sel === '.campaign__item') {
+          el.style.transitionDelay = `${i * 0.12}s`;
+        }
+        observer.observe(el);
+      });
+    });
+
+    // ── Nav scroll state ──────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile menu ───────────────────────────────────────────────
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-menu__link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── Newsletter ────────────────────────────────────────────────
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('.newsletter__input');
+      const btn = e.target.querySelector('.btn__label');
+      btn.textContent = 'Subscribed ✓';
+      input.value = '';
+      setTimeout(() => { btn.textContent = 'Subscribe'; }, 3000);
+    }
+  </script>
+</body>
+</html>
