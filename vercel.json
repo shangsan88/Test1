@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
+  "outputDirectory": "client/dist",
+  "functions": {
+    "api/index.ts": {
+      "memory": 512,
+      "maxDuration": 10,
+      "includeFiles": "server/src/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/((?!api).*)", "destination": "/index.html" }
+  ]
+}
